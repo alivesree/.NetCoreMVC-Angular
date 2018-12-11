@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Numr.Data;
 
 namespace NumrWeb
 {
@@ -13,6 +14,8 @@ namespace NumrWeb
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            CommonSettings.ConnectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
+           // CommonSettings.ConnectionString = Configuration.GetConnectionString("dbConnection");
         }
 
         public IConfiguration Configuration { get; }

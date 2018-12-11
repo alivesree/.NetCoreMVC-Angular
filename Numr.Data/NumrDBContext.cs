@@ -1,24 +1,26 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System;
+using System.Collections.Generic;
 
 namespace Numr.Data
 {
-    class NumrDBContext 
+    public class NumrDBContext 
     {
         NpgsqlConnection Connection;
-        public NumrDBContext(IConfiguration config)
-        {
-            Connection = new NpgsqlConnection(config.GetConnectionString("numrbasenew"));
-        }
 
+        public NumrDBContext()
+        {
+            Connection =new NpgsqlConnection(CommonSettings.ConnectionString);
+        }
+  
         public void Open()
         {
             try
             {
                 Connection.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             // throw ("Could not open connection");
             }
@@ -34,5 +36,6 @@ namespace Numr.Data
             }
         }
 
+       
     }
 }

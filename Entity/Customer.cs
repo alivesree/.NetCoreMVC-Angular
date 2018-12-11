@@ -1,4 +1,3 @@
-using Numr.Data.EF;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Numr.Business.Entities
 {
 [Table("student", Schema = "public")]
-	public class Student : Entity
+	public class Customer 
 		{
 			[Key]
 			[Column("id")]
