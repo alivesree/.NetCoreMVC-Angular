@@ -11,7 +11,7 @@ namespace Numr.Data
 
         public NumrDBContext()
         {
-            Connection =new NpgsqlConnection(CommonSettings.ConnectionString);
+            Connection =new NpgsqlConnection(DataSettings.ConnectionString);
         }
   
         public bool Open()

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Numr.Data
 {
-    public static class CommonSettings
+    public static class DataSettings
     {
         public static string ConnectionString { get; set; }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Numr.Business.Contracts;
 using Numr.Business.Service;
 
 namespace NumrWeb.Controllers
@@ -10,6 +11,13 @@ namespace NumrWeb.Controllers
     [Route("api/cust")]
     public class SampleDataController : Controller
     {
+       private readonly ICustomerService _customerService;
+
+        public SampleDataController(ICustomerService customerService)
+        {
+
+            _customerService = customerService;
+        }
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -44,7 +52,7 @@ namespace NumrWeb.Controllers
         [HttpGet("get")]
         public void getTestData()
         {
-            new CustomerService().GetCustomer("1");
+           _customerService.GetCustomer("1");
         }
     }
 }
