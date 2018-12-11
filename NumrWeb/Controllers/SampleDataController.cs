@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Numr.Business.Service;
 
 namespace NumrWeb.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cust")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -39,6 +40,11 @@ namespace NumrWeb.Controllers
                     return 32 + (int)(TemperatureC / 0.5556);
                 }
             }
+        }
+        [HttpGet("get")]
+        public void getTestData()
+        {
+            new CustomerService().GetCustomer("1");
         }
     }
 }

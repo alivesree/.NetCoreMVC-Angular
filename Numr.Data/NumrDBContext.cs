@@ -7,22 +7,24 @@ namespace Numr.Data
 {
     public class NumrDBContext 
     {
-        NpgsqlConnection Connection;
+     public NpgsqlConnection Connection { get; set; }
 
         public NumrDBContext()
         {
             Connection =new NpgsqlConnection(CommonSettings.ConnectionString);
         }
   
-        public void Open()
+        public bool Open()
         {
             try
             {
                 Connection.Open();
+                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-            // throw ("Could not open connection");
+                // throw ("Could not open connection");
+                return false;
             }
         }
         public void Close()

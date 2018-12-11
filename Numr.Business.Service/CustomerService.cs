@@ -10,6 +10,8 @@ namespace Numr.Business.Service
     {
         public Customer GetCustomer(string id)
         {
+            string query = "select now()";
+         var curtime=   new ServiceBase().ExecuteScalar(query);
             return new Customer();
         }
     }
