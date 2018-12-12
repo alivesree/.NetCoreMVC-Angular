@@ -1,18 +1,16 @@
 ﻿using Numr.Business.Contracts;
 using Numr.Business.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Numr.Data.Repositories;
 
 namespace Numr.Business.Service
 {
     public class CustomerService : ICustomerService
     {
+        CustomerRepository _customerRepository = new CustomerRepository();
         public Customer GetCustomer(string id)
         {
-            string query = "select now()";
-         var curtime=   new ServiceBase().ExecuteScalar(query);
-            return new Customer();
+            Customer customer = _customerRepository.GetCustomer(id);
+            return customer;
         }
     }
 }

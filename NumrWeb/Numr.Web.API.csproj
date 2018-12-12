@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Numr.Business.Service\Numr.Business.Service.csproj" />
-    <ProjectReference Include="..\Numr.Data\Numr.Data.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

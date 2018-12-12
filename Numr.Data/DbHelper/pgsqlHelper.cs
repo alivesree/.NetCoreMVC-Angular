@@ -1,16 +1,15 @@
 ﻿using Npgsql;
-using Numr.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Text;
 
-namespace Numr.Business.Service
+namespace Numr.Data.DbHelper
 {
-    class ServiceBase
+   public class PgsqlHelper : IDbHelper
     {
-        NumrDBContext dBContext = new NumrDBContext();
+
+        NpgsqlConnection Connection= new NpgsqlConnection(DataSettings.ConnectionString); 
 
         public DBResult ExecuteNonQuery(string query)
         {
@@ -18,9 +17,9 @@ namespace Numr.Business.Service
             DBResult Result = new DBResult();
             try
             {
-                if (dBContext.Open())
+                if (OpenDataBaseConnection())
                 {
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, dBContext.Connection);
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, Connection);
                     Result.Result = cmd.ExecuteNonQuery();
                     Result.IsSucceess = true;
                 }
@@ -33,7 +32,7 @@ namespace Numr.Business.Service
             }
             finally
             {
-                dBContext.Close();
+                Connection.Close();
             }
             return Result;
         }
@@ -43,10 +42,10 @@ namespace Numr.Business.Service
             DBResult Result = new DBResult();
             try
             {
-                if (dBContext.Open())
+                if (OpenDataBaseConnection())
                 {
                     DataTable result = new DataTable();
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, dBContext.Connection);
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, Connection);
                     NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                     da.Fill(result);
                     Result.Result = da;
@@ -61,7 +60,7 @@ namespace Numr.Business.Service
             }
             finally
             {
-                dBContext.Close();
+                Connection.Close();
             }
             return Result;
         }
@@ -71,9 +70,9 @@ namespace Numr.Business.Service
             DBResult Result = new DBResult();
             try
             {
-                if (dBContext.Open())
+                if (OpenDataBaseConnection())
                 {
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, dBContext.Connection);
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, Connection);
                     Result.Result = cmd.ExecuteScalar();
                     Result.IsSucceess = true;
                 }
@@ -86,30 +85,23 @@ namespace Numr.Business.Service
             }
             finally
             {
-                dBContext.Close();
+                Connection.Close();
             }
             return Result;
         }
 
-    }
-
-    public class DBResult
-    {
-        public bool IsSucceess { get; set; }
-        public string ErrorMessage { get; set; }
-        public string Description { get; set; }
-        public string ErrorCommandQuery { get; set; }
-        public object Result { get; set; }
-
-        public DBResult()
+        public bool OpenDataBaseConnection()
         {
-            IsSucceess = false;
-            ErrorMessage = "";
-            Description = "";
-            ErrorCommandQuery = "";
-            Result = null;
+            try
+            {
+                Connection.Open();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // throw ("Could not open connection");
+                return false;
+            }
         }
     }
-
-
 }
