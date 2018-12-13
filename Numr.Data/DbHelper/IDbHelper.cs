@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Numr.Business.Entities;
 
 namespace Numr.Data.DbHelper
 {
@@ -10,5 +11,8 @@ namespace Numr.Data.DbHelper
         DBResult ExecuteSelectQuery(string query);
         DBResult ExecuteScalar(string query);
         bool OpenDataBaseConnection();
+        DBResult BulkInsert(List<object> list);
+        DBResult BulkInsert(object obj);
+
     }
 }

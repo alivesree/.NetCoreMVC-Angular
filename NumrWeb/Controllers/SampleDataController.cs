@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Numr.Business.Contracts;
 using Numr.Business.Service;
+using Numr.Business.Entities;
 
 namespace NumrWeb.Controllers
 {
@@ -49,10 +50,24 @@ namespace NumrWeb.Controllers
                 }
             }
         }
+
         [HttpGet("get")]
         public void getTestData()
         {
            _customerService.GetCustomer("1");
         }
+
+        // POST: Customer/Create
+        [HttpPost("Add")]
+        public void Create(Customer cust)
+        {
+            if (ModelState.IsValid)
+            {
+                _customerService.AddCustomer(cust);
+                
+            }
+        }
+
+
     }
 }

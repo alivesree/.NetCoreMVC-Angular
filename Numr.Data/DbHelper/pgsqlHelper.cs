@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Numr.Business.Entities;
+using Z.Dapper.Plus;
 
 namespace Numr.Data.DbHelper
 {
@@ -102,6 +104,25 @@ namespace Numr.Data.DbHelper
                 // throw ("Could not open connection");
                 return false;
             }
+        }
+
+        public DBResult BulkInsert(List<object> list)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var result = dbConnection.BulkInsert(list);
+            }
+            return new DBResult() ;
+
+        }
+        public DBResult BulkInsert(object obj)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var result = dbConnection.BulkInsert(obj);
+            }
+            return new DBResult();
+
         }
     }
 }

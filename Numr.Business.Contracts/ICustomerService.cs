@@ -6,5 +6,6 @@ namespace Numr.Business.Contracts
     public interface ICustomerService
     {
        Customer GetCustomer(string id);
+       Customer AddCustomer(Customer cust);
     }
 }
