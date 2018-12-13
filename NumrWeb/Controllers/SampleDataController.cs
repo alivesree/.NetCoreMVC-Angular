@@ -9,7 +9,7 @@ using Numr.Business.Entities;
 
 namespace NumrWeb.Controllers
 {
-    [Route("api/cust")]
+    [Route("Api/Customer")]
     public class SampleDataController : Controller
     {
        private readonly ICustomerService _customerService;
@@ -51,21 +51,20 @@ namespace NumrWeb.Controllers
             }
         }
 
-        [HttpGet("get")]
+        [HttpPost("get")]
         public void getTestData()
         {
            _customerService.GetCustomer("1");
         }
 
         // POST: Customer/Create
-        [HttpPost("Add")]
-        public void Create(Customer cust)
+        [HttpGet]
+        [Route("Add")]
+        public void Create([FromBody] Customer cust)
         {
-            if (ModelState.IsValid)
-            {
                 _customerService.AddCustomer(cust);
                 
-            }
+            
         }
 
 
